@@ -1,6 +1,3 @@
-#Sample code snippets for working with psycopg
-
-
 #Connecting to a database
 #Note: If the database does not exist, then this command will create the database
 
@@ -14,9 +11,9 @@ conn = psycopg2.connect( user="postgres", password="pass", host="localhost", por
 cur = conn.cursor()
 cur.connection.set_isolation_level(0)
 #create db
-cur.execute("CREATE DATABASE Tcount")
+cur.execute("CREATE DATABASE tcount")
 cur.close()
-conn = psycopg2.connect(database="Tcount", user="postgres", password="pass", host="localhost", port="5432")
+conn = psycopg2.connect(database="tcount", user="postgres", password="pass", host="localhost", port="5432")
 cur = conn.cursor()
 #Create a Table
 cur.execute('''CREATE TABLE Tweetwordcount
@@ -26,12 +23,8 @@ conn.commit()
 conn.close()
 
 
-#Running sample SQL statements
 #Inserting/Selecting/Updating
 
-#Rather than executing a whole query at once, it is better to set up a cursor that encapsulates the query, 
-#and then read the query result a few rows at a time. One reason for doing this is
-#to avoid memory overrun when the result contains a large number of rows. 
 
 cur = conn.cursor()
 
@@ -41,7 +34,6 @@ cur.execute("INSERT INTO Tweetwordcount (word,count) \
 conn.commit()
 
 #Update
-#Assuming you are passing the tuple (uWord, uCount) as an argument
 cur.execute("UPDATE Tweetwordcount SET count=%s WHERE word=%s", (uWord, uCount))
 conn.commit()
 
